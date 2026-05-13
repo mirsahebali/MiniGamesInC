@@ -1,0 +1,105 @@
+/*******************************************************************************************
+ *
+ *  Mini Games in C
+ *
+ *
+ *   This game has been created using raylib (www.raylib.com)
+ *   raylib is licensed under an unmodified zlib/libpng license (View raylib.h for details)
+ *
+ *   Raylib credits:
+ *   Copyright (c) 2021 Ramon Santamaria (@raysan5)
+ *
+ *  Project credits:
+ *  Copyright (c) 2026 Mir Saheb Ali (@mirsahebali)
+ ********************************************************************************************/
+
+#include "raylib.h"
+
+#if defined(RUN_TESTS)
+#include "tests.h"
+#endif
+
+#if defined(PLATFORM_WEB)
+#include <emscripten/emscripten.h>
+#endif
+static const int SCREEN_WIDTH = 1920;
+static const int SCREEN_HEIGHT = 1080;
+
+// Window initialization and global state setup
+static void GameInit(void);
+
+static void GameLoop(void);
+// Input handling is done here
+static void GameControls(void);
+// Data update on each frame
+static void GameUpdate(void);
+// rendering logic
+static void GameDraw(void);
+// Cleanup
+static void GameEnd(void);
+
+// INFO: global mutable shared state from 'global_state.h'
+float delta = 0.0f;
+
+int main(void)
+{
+#if defined(RUN_TESTS)
+    runTests();
+    return 0;
+#endif
+
+    GameInit();
+#if defined(PLATFORM_WEB)
+    emscripten_set_main_loop(GameLoop, 60, 1);
+#else
+    // SetTargetFPS(60); // Set our game to run at 60 frames-per-second
+
+    // Main game loop
+    while (!WindowShouldClose()) // Detect window close button or ESC key
+    {
+        GameLoop();
+    }
+#endif
+    GameEnd();
+
+    return 0;
+}
+
+static void GameInit(void)
+{
+    SetConfigFlags(FLAG_FULLSCREEN_MODE);
+    // Initialization:
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "MiniGames in C");
+
+    InitAudioDevice(); // Initialize audio device
+}
+
+// Update and draw game frame
+static void GameLoop(void)
+{
+    delta = GetFrameTime();
+    GameControls();
+    GameUpdate();
+    GameDraw();
+}
+
+static void GameControls(void)
+{
+}
+static void GameUpdate(void)
+{
+}
+
+static void GameDraw(void)
+{
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    EndDrawing();
+}
+
+static void GameEnd(void)
+{
+    CloseAudioDevice();
+    CloseWindow();
+}
+
