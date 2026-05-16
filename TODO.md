@@ -1,0 +1,10 @@
+- [x] flappy-bird
+- [ ] jetpack-joyride
+- [ ] river-raid
+- [ ] indy-500
+- [ ] pacman
+- [ ] super-mario-bros
+- [ ] worms
+- [ ] crash-bandicoot
+- [ ] portal
+- [ ] doom

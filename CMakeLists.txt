@@ -27,17 +27,18 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(carena)
 
-set(PROJECT_GAMES crash-bandicoot
-                  doom
-                  flappy-bird
-                  indy-500
+set(PROJECT_GAMES flappy-bird
                   jetpack-joyride
-                  pacman
-                  portal
                   river-raid
+                  indy-500
+                  pacman
                   super-mario-bros
-                  worms)
+                  worms
+                  crash-bandicoot
+                  portal
+                  doom)
 
+add_subdirectory(src/core)
 
 foreach(GAME ${PROJECT_GAMES})
   add_executable(${GAME})
@@ -69,7 +70,7 @@ foreach(GAME ${PROJECT_GAMES})
   endif()
 
   #set(raylib_VERBOSE 1)
-  target_link_libraries(${GAME} raylib m)
+  target_link_libraries(${GAME} PRIVATE ${PROJECT_NAME}-core)
 
   # Web Configurations
   if ("${PLATFORM}" STREQUAL "Web")

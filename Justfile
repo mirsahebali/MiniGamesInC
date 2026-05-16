@@ -17,8 +17,8 @@ release:
 clean:
   rm -rf build tests-out
 
-dbg:
-  gf2 ./build/InfinityCastle/InfinityCastle
+dbg GAME: build
+  cd build/{{GAME}} && gf2 ./{{GAME}}
 
 
 lsp:
